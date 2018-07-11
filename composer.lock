@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2803043964c81646689cf763b1a8462",
+    "content-hash": "75f1494b555e7ef4874ea5bbd0f8cd7f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1166,6 +1166,204 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "msgphp/domain",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/domain.git",
+                "reference": "34eeb9ed0233582e16ac488e9156f59a0c378b02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/34eeb9ed0233582e16ac488e9156f59a0c378b02",
+                "reference": "34eeb9ed0233582e16ac488e9156f59a0c378b02",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.0"
+            },
+            "require-dev": {
+                "api-platform/core": "^2.2",
+                "doctrine/doctrine-bundle": "^1.8",
+                "doctrine/orm": "^2.6",
+                "elasticsearch/elasticsearch": "^6.0",
+                "psr/container": "^1.0",
+                "ramsey/uuid": "^3.7",
+                "ramsey/uuid-doctrine": "^1.4",
+                "simple-bus/message-bus": "^3.0",
+                "symfony/config": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0",
+                "symfony/messenger": "^4.1",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/property-access": "^3.4|^4.0",
+                "symfony/var-dumper": "^3.4|^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\Domain\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "A base domain layer to rapidly built other domain layers",
+            "keywords": [
+                "entity"
+            ],
+            "time": "2018-07-08T08:09:19+00:00"
+        },
+        {
+            "name": "msgphp/user",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/user.git",
+                "reference": "e771b7bad40b86c985372553cb9364ad5ac734ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/e771b7bad40b86c985372553cb9364ad5ac734ad",
+                "reference": "e771b7bad40b86c985372553cb9364ad5ac734ad",
+                "shasum": ""
+            },
+            "require": {
+                "msgphp/domain": "~0.5"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.6",
+                "lexik/jwt-authentication-bundle": "^2.5",
+                "msgphp/eav": "~0.5",
+                "sensio/framework-extra-bundle": "^5.1",
+                "symfony/console": "^3.4|^4.0",
+                "symfony/form": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/security-core": "^3.4|^4.0",
+                "symfony/validator": "^3.4|^4.0",
+                "symfony/var-dumper": "^3.4|^4.0"
+            },
+            "suggest": {
+                "msgphp/eav": "To enable user attribute values"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\User\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "A domain layer providing basic user management",
+            "keywords": [
+                "security",
+                "user"
+            ],
+            "time": "2018-07-08T09:51:13+00:00"
+        },
+        {
+            "name": "msgphp/user-bundle",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/user-bundle.git",
+                "reference": "7acbbb3f5416ccd09395a388cb001591299ea353"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/7acbbb3f5416ccd09395a388cb001591299ea353",
+                "reference": "7acbbb3f5416ccd09395a388cb001591299ea353",
+                "shasum": ""
+            },
+            "require": {
+                "msgphp/user": "~0.5",
+                "symfony/config": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.8",
+                "doctrine/orm": "^2.6",
+                "lexik/jwt-authentication-bundle": "^2.5",
+                "msgphp/eav-bundle": "~0.5",
+                "simple-bus/symfony-bridge": "^5.1",
+                "symfony/console": "^3.4|^4.0",
+                "symfony/form": "^3.4|^4.0",
+                "symfony/maker-bundle": "^1.5",
+                "symfony/messenger": "^4.1",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/security-bundle": "^3.4|^4.0",
+                "symfony/twig-bundle": "^3.4|^4.0",
+                "symfony/validator": "^3.4|^4.0",
+                "symfony/var-dumper": "^3.4|^4.0"
+            },
+            "suggest": {
+                "msgphp/eav-bundle": "To enable user attribute values"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\UserBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "Basic user management (the `User` domain)",
+            "keywords": [
+                "security",
+                "user"
+            ],
+            "time": "2018-07-08T09:43:27+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -3089,6 +3287,69 @@
             "description": "Enforces Long Term Supported versions of Symfony components",
             "homepage": "https://symfony.com",
             "time": "2018-04-03T05:04:16+00:00"
+        },
+        {
+            "name": "symfony/messenger",
+            "version": "v4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/messenger.git",
+                "reference": "e830f48ffa1d2e7717d790870a1d5b0b8cc3ee34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/e830f48ffa1d2e7717d790870a1d5b0b8cc3ee34",
+                "reference": "e830f48ffa1d2e7717d790870a1d5b0b8cc3ee34",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/console": "~3.4|~4.0",
+                "symfony/dependency-injection": "~3.4.6|~4.0",
+                "symfony/http-kernel": "~3.4|~4.0",
+                "symfony/process": "~3.4|~4.0",
+                "symfony/property-access": "~3.4|~4.0",
+                "symfony/serializer": "~3.4|~4.0",
+                "symfony/validator": "~3.4|~4.0",
+                "symfony/var-dumper": "~3.4|~4.0"
+            },
+            "suggest": {
+                "enqueue/messenger-adapter": "For using the php-enqueue library as a transport."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Samuel Roze",
+                    "email": "samuel.roze@gmail.com"
+                }
+            ],
+            "description": "Symfony Messenger Component",
+            "homepage": "https://symfony.com",
+            "time": "2018-06-20T09:25:27+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
