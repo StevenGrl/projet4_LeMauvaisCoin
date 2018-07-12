@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}LeMauvaisCoin{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('build/css/main.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -22,14 +23,35 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    {% if app.request.session.get('connected') == false %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('user_new') }}">Inscription</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_connection') }}">Connexion</a>
+                    </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Créer une annonce</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user_disconnection') }}" class="nav-link">Déconnexion</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
         {% block content %}
         <div class="container">
+            <div class="row">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} mt-3 col-6 offset-3 text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
             {% block body %}{% endblock %}
         </div>
         {% endblock %}

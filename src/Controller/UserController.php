@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ConnectionType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,6 +23,49 @@ class UserController extends Controller
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/connection", name="user_connection", methods="GET|POST")
+     */
+    public function connection(Request $request, Session $session): Response
+    {
+        $user = new User();
+        $form = $this->createForm(ConnectionType::class, $user);
+        $form->handleRequest($request);
+        $data = $form->getData();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->findOneByEmail($user->getEmail());
+            if (!$user) {
+                $this->addFlash('danger', 'Cet email n\'est pas enregistré dans la base de données');
+                return $this->redirectToRoute('user_connection');
+            }
+
+            if ($user && $user->getPassword() !== $data->getPassword()) {
+                $this->addFlash('danger', 'Votre mot de passe est incorrect !');
+                return $this->render('user/connection.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+            $session->set('connected', true);
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('user/connection.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/disconnection", name="user_disconnection", methods="GET|POST")
+     */
+    public function disconnection(Session $session)
+    {
+        $session->set('connected', false);
+
+        return $this->redirectToRoute('homepage');
     }
 
     /**
