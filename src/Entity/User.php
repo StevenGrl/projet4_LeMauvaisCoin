@@ -41,6 +41,13 @@ class User
      */
     private $city;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     public function getId()
     {
         return $this->id;
@@ -89,7 +96,7 @@ class User
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
+        $this->password = md5($password);
 
         return $this;
     }
@@ -104,5 +111,24 @@ class User
         $this->city = $city;
 
         return $this;
+    }
+
+    /**
+     * Retourne les rôles de l'user
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
     }
 }
