@@ -14,5 +14,7 @@
     <div class="form-group offset-2 col-8">
         {{ form_row(form.city) }}
     </div>
-    <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+    <button class="btn btn-primary">
+        <i class="fas fa-check"></i> {{ button_label|default('Valider') }}
+    </button>
 {{ form_end(form) }}
