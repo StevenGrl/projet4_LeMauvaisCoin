@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row my-5 py-3 justify-content-center">
+        <div class="col-8 shadow py-3">
+            <h1 class="text-center col-12">Mon compte</h1>
+            <hr class="col-6">
+            <div class="col-12">
+                <div class="col-2 offset-2 d-inline-block"> Nom :</div>
+                <div class="col-6 d-inline-block">{{ user.lastName }}</div>
+            </div>
+            <div class="col-12">
+                <div class="col-2 offset-2 d-inline-block">Prénom :</div>
+                <div class="col-6 d-inline-block">{{ user.firstName }}</div>
+            </div>
+            <div class="col-12">
+                <div class="col-2 offset-2 d-inline-block">Email :</div>
+                <div class="col-6 d-inline-block">{{ user.email }}</div>
+            </div>
+            <div class="col-12">
+                <div class="col-2 offset-2 d-inline-block">Ville :</div>
+                <div class="col-6 d-inline-block">{{ user.city }}</div>
+            </div>
+            <div class="text-center">
+            <a class="btn btn-primary mt-3" href="{{ path('user_edit', {'id': user.id}) }}">
+                <i class="fas fa-pen"></i> {{ button_label|default('Modifier') }}
+            </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -50,6 +50,7 @@ class UserController extends Controller
                 ));
             }
             $session->set('connected', true);
+            $session->set('user', $user);
             return $this->redirectToRoute('homepage');
         }
 
@@ -66,6 +67,16 @@ class UserController extends Controller
         $session->set('connected', false);
 
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/account/{user}", name="user_account", methods="GET|POST")
+     */
+    public function account(User $user)
+    {
+        return $this->render('user/account.html.twig', array(
+            'user' => $user,
+        ));
     }
 
     /**
