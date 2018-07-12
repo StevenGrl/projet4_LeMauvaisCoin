@@ -30,20 +30,19 @@ class UserController extends Controller
      */
     public function connection(Request $request, Session $session): Response
     {
-        $user = new User();
-        $form = $this->createForm(ConnectionType::class, $user);
+        $form = $this->createForm(ConnectionType::class);
         $form->handleRequest($request);
-        $data = $form->getData();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->findOneByEmail($user->getEmail());
+            $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
             if (!$user) {
                 $this->addFlash('danger', 'Cet email n\'est pas enregistré dans la base de données');
                 return $this->redirectToRoute('user_connection');
             }
 
-            if ($user && $user->getPassword() !== $data->getPassword()) {
+            if ($user->getPassword() !== md5($data['password'])) {
                 $this->addFlash('danger', 'Votre mot de passe est incorrect !');
                 return $this->render('user/connection.html.twig', array(
                     'form' => $form->createView(),
@@ -64,7 +63,7 @@ class UserController extends Controller
      */
     public function disconnection(Session $session)
     {
-        $session->set('connected', false);
+        $session->clear();
 
         return $this->redirectToRoute('homepage');
     }
@@ -94,6 +93,7 @@ class UserController extends Controller
                 $this->addFlash('danger', 'Cet email est déjà utilisé');
                 return $this->redirectToRoute('user_new');
             }
+            $user->setRoles(["ROLE_USER"]);
             $em->persist($user);
             $em->flush();
 
