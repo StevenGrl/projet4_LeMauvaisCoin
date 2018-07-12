@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}LeMauvaisCoin{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
         <link rel="stylesheet" href="{{ asset('build/css/main.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
@@ -33,6 +34,12 @@
                     {% else %}
                         <li class="nav-item">
                             <a href="#" class="nav-link">Créer une annonce</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user_account', {'user': app.request.session.get('user').id }) }}"
+                               class="nav-link">
+                                Mon compte
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ path('user_disconnection') }}" class="nav-link">Déconnexion</a>
