@@ -1,3 +1,7 @@
 hr {
   border-top: blue 2px solid;
 }
+
+.custom-file-label::after {
+  content: "Parcourir";
+}

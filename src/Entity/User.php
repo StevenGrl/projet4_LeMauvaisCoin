@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,21 @@ class User
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="creator")
+     */
+    private $ads;
+
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
+
+    public function __construct()
+    {
+        $this->ads = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -130,5 +147,36 @@ class User
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return Collection|Ad[]
+     */
+    public function getAds(): Collection
+    {
+        return $this->ads;
+    }
+
+    public function addAd(Ad $ad): self
+    {
+        if (!$this->ads->contains($ad)) {
+            $this->ads[] = $ad;
+            $ad->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAd(Ad $ad): self
+    {
+        if ($this->ads->contains($ad)) {
+            $this->ads->removeElement($ad);
+            // set the owning side to null (unless already changed)
+            if ($ad->getCreator() === $this) {
+                $ad->setCreator(null);
+            }
+        }
+
+        return $this;
     }
 }
