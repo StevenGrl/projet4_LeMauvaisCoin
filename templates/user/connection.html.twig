@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
-
 {% block body %}
     <div class="row my-5 py-3 justify-content-center">
         <div class="col-8 shadow py-3">
-            <h1 class="text-center col-12">Inscription</h1>
+            <h1 class="text-center col-12">Connexion</h1>
             <hr class="col-6">
             <div class="text-center col">
-                {{ include('user/_form.html.twig') }}
+                {{ include('user/_connection.form.html.twig') }}
             </div>
         </div>
     </div>
