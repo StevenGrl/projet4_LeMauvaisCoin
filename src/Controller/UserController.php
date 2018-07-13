@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * @Route("/user")
@@ -26,49 +27,6 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/connection", name="user_connection", methods="GET|POST")
-     */
-    public function connection(Request $request, Session $session): Response
-    {
-        $form = $this->createForm(ConnectionType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
-            if (!$user) {
-                $this->addFlash('danger', 'Cet email n\'est pas enregistré dans la base de données');
-                return $this->redirectToRoute('user_connection');
-            }
-
-            if ($user->getPassword() !== md5($data['password'])) {
-                $this->addFlash('danger', 'Votre mot de passe est incorrect !');
-                return $this->render('user/connection.html.twig', array(
-                    'form' => $form->createView(),
-                ));
-            }
-            $session->set('connected', true);
-            $session->set('user', $user);
-            return $this->redirectToRoute('homepage');
-        }
-
-        return $this->render('user/connection.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * @Route("/disconnection", name="user_disconnection", methods="GET|POST")
-     */
-    public function disconnection(Session $session)
-    {
-        $session->clear();
-
-        return $this->redirectToRoute('homepage');
-    }
-
-    /**
      * @Route("/account/{user}", name="user_account", methods="GET|POST")
      */
     public function account(User $user)
@@ -76,34 +34,6 @@ class UserController extends Controller
         return $this->render('user/account.html.twig', array(
             'user' => $user,
         ));
-    }
-
-    /**
-     * @Route("/new", name="user_new", methods="GET|POST")
-     */
-    public function new(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            if ($em->getRepository(User::class)->findByEmail($user->getEmail())) {
-                $this->addFlash('danger', 'Cet email est déjà utilisé');
-                return $this->redirectToRoute('user_new');
-            }
-            $user->setRoles(["ROLE_USER"]);
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('user_index');
-        }
-
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
