@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
-use App\Entity\User;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -28,19 +27,21 @@ class AdController extends Controller
     /**
      * @Route("/new", name="ad_new", methods="GET|POST")
      */
-    public function new(Request $request, Session $session): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
-//        var_dump($session->get('user')->getId()); die();
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $ad->getImageFile();
+            $fileName = $fileUploader->upload($file);
+            $ad->setImageFile($file);
+            $ad->setImage($fileName);
             $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->find($session->get('user')->getId());
             $ad->setCreatedAt(new \DateTime());
             $ad->setUpdatedAt(new \DateTime());
-            $ad->setCreator($user);
+            $ad->setCreator($this->getUser());
             $em->persist($ad);
             $em->flush();
 

@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
@@ -32,6 +34,16 @@ class Ad
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @Assert\File(
+     *     mimeTypes = {"image/jpeg", "image/png", "image/jpg"},
+     *     mimeTypesMessage = "Type autorisés (.jpeg,.png,.jpg)"
+     * )
+     *
+     * @var UploadedFile
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="datetime")
@@ -104,6 +116,22 @@ class Ad
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getImageFile(): ?UploadedFile
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param UploadedFile $imageFile
+     */
+    public function setImageFile(UploadedFile $imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
