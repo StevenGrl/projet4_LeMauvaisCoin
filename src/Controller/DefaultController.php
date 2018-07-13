@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
@@ -11,11 +10,9 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Session $session)
+    public function indexAction()
     {
-        if ($session->get('connected') !== true) {
-            $session->set('connected', false);
-        }
-        return $this->render('index.html.twig');
+        $user = $this->getUser();
+        return $this->render('index.html.twig', array('user' => $user));
     }
 }

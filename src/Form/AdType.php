@@ -40,23 +40,22 @@ class AdType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Description'
                 )))
-            ->add('image', FileType::class, array(
+            ->add('imageFile', FileType::class, array(
                 'label' => 'Image de l\'annonce',
                 'required' => false,
             ))
-            ->add('images', FileType::class, array(
-                'label' => 'Images bonus',
-                'multiple' => true,
-                'required' => false,
-            ))
+//            ->add('images', FileType::class, array(
+//                'label' => 'Images bonus',
+//                'required' => false,
+//            ))
             ->add('type', EntityType::class, array(
                 'class' => Type::class,
                 'choice_label' => 'label',
             ))
         ;
-        $builder->get('images')
-            ->addModelTransformer(new CollectionToArrayTransformer(), true)
-            ->addModelTransformer(new ImagesToCollectionTransformer($this->imageRepository), true);
+//        $builder->get('images')
+//            ->addModelTransformer(new CollectionToArrayTransformer(), true)
+//            ->addModelTransformer(new ImagesToCollectionTransformer($this->imageRepository), true);
     }
 
     public function configureOptions(OptionsResolver $resolver)
