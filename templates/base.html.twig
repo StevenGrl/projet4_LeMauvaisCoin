@@ -24,31 +24,28 @@
                         <a class="nav-link" href="{{ path('homepage') }}">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Voir toutes les annonces</a>
+                        <a class="nav-link" href="{{ path('ad_index') }}">Voir toutes les annonces</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    {% if app.request.session.get('connected') == false %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('user_new') }}">Inscription</a>
+                        <a class="nav-link" href="{{ path('user_registration') }}">Inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('user_connection') }}">Connexion</a>
+                        <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
                     </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Créer une annonce</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('user_account', {'user': app.request.session.get('user').id }) }}"
-                               class="nav-link">
-                                Mon compte
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('user_disconnection') }}" class="nav-link">Déconnexion</a>
-                        </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a href="{{ path('ad_new') }}" class="nav-link">Créer une annonce</a>
+                    </li>
+                    <li class="nav-item">
+                        {#<a href="{{ path('user_account', {'user': app.request.session.get('user').id }) }}"#}
+                           {#class="nav-link">#}
+                            {#Mon compte#}
+                        {#</a>#}
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('security_logout') }}" class="nav-link">Déconnexion</a>
+                    </li>
                 </ul>
             </div>
         </nav>
