@@ -1,5 +1,8 @@
-<form method="post" action="{{ path('ad_delete', {'id': ad.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
-    <button class="btn">Delete</button>
-</form>
+<div class="d-inline-block">
+    <form method="post" action="{{ path('ad_delete', {'id': ad.id}) }}"
+      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
+        <button class="btn btn-danger d-inline-block">Supprimer <i class="far fa-trash-alt"></i></button>
+    </form>
+</div>
