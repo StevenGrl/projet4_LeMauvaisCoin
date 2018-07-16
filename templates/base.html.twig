@@ -20,26 +20,51 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item
+                    {% if app.request.attributes.get('_route') == 'homepage' %}
+                    active
+                    {% endif %}
+                    ">
                         <a class="nav-link" href="{{ path('homepage') }}">Accueil <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item
+                    {% if app.request.attributes.get('_route') == 'ad_index' %}
+                    active
+                    {% endif %}
+                    ">
                         <a class="nav-link" href="{{ path('ad_index') }}">Voir toutes les annonces</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     {% if app.user is null %}
-                    <li class="nav-item">
+                    <li class="nav-item
+                    {% if app.request.attributes.get('_route') == 'user_registration' %}
+                    active
+                    {% endif %}
+                    ">
                         <a class="nav-link" href="{{ path('user_registration') }}">Inscription</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item
+                    {% if app.request.attributes.get('_route') == 'security_login' %}
+                    active
+                    {% endif %}
+                    ">
                         <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
                     </li>
                     {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item
+                    {% if app.request.attributes.get('_route') == 'ad_new' %}
+                    active
+                    {% endif %}
+                    ">
                         <a href="{{ path('ad_new') }}" class="nav-link">Créer une annonce</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown
+                    {% if app.request.attributes.get('_route') == 'user_account' or
+                        app.request.attributes.get('_route') == 'ad_mine' %}
+                    active
+                    {% endif %}
+                    ">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ app.user.username }}
