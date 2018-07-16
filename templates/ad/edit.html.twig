@@ -3,11 +3,21 @@
 {% block title %}Edit Ad{% endblock %}
 
 {% block body %}
-    <h1>Edit Ad</h1>
-
-    {{ include('ad/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('ad_index') }}">back to list</a>
-
-    {{ include('ad/_delete_form.html.twig') }}
+    <div class="row my-5 py-3 justify-content-center">
+        <div class="col-8 shadow py-3">
+            <h1 class="text-center">Modifier l'annonce</h1>
+            <hr class="col-6">
+            <div class="text-center col">
+                {{ include('ad/_form.html.twig', {'button_label': 'Mettre à jour' }) }}
+            </div>
+            <div class="col mt-3">
+                <a class="btn btn-dark" href="{{ path('ad_show', {'id': ad.id}) }}">
+                    <i class="fas fa-chevron-left"></i> Retourner à l'annonce
+                </a>
+                <div class="float-right">
+                {{ include('ad/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
