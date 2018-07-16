@@ -25,6 +25,17 @@ class AdController extends Controller
     }
 
     /**
+     * @Route("/mine", name="ad_mine", methods="GET")
+     */
+    public function mine(AdRepository $adRepository): Response
+    {
+        if ($this->getUser()) {
+            return $this->render('ad/mine.html.twig', ['ads' => $adRepository->findByCreator($this->getUser()->getId())]);
+        }
+        return $this->render('index.html.twig');
+    }
+
+    /**
      * @Route("/new", name="ad_new", methods="GET|POST")
      */
     public function new(Request $request, FileUploader $fileUploader): Response
