@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Ad;
 use App\Entity\Type;
 use App\Repository\ImageRepository;
-use App\Form\DataTransformer\ImagesToCollectionTransformer;
-use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -50,10 +48,6 @@ class AdType extends AbstractType
                 'label' => 'Image de l\'annonce',
                 'required' => false,
             ))
-//            ->add('images', FileType::class, array(
-//                'label' => 'Images bonus',
-//                'required' => false,
-//            ))
             ->add('price', IntegerType::class, array(
                 'label' => false,
                 'required' => false,
@@ -70,13 +64,10 @@ class AdType extends AbstractType
                 ),
             ))
             ->add('type', EntityType::class, array(
+                'label' => false,
                 'class' => Type::class,
                 'choice_label' => 'label',
-            ))
-        ;
-//        $builder->get('images')
-//            ->addModelTransformer(new CollectionToArrayTransformer(), true)
-//            ->addModelTransformer(new ImagesToCollectionTransformer($this->imageRepository), true);
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
