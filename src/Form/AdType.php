@@ -32,7 +32,8 @@ class AdType extends AbstractType
             ->add('title', TextType::class, array(
                 'label' => false,
                 'attr' => array(
-                    'placeholder' => 'Titre de l\'annonce'
+                    'placeholder' => 'Titre de l\'annonce',
+                    'autofocus' => true,
                 )))
             ->add('name', TextType::class, array(
                 'label' => false,
