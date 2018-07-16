@@ -13,6 +13,7 @@ Encore
     // uncomment to define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
     .addStyleEntry('css/main', './assets/scss/main.scss')
+    .addStyleEntry('css/ad', './assets/scss/ad.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()
