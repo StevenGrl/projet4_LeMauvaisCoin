@@ -36,6 +36,11 @@ class AdType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Titre de l\'annonce'
                 )))
+            ->add('name', TextType::class, array(
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Nom de l\'article'
+                )))
             ->add('description', TextareaType::class, array(
                 'label' => false,
                 'attr' => array(
