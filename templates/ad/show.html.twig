@@ -7,10 +7,15 @@
         <div class="shadow my-5 py-5 justify-content-center col-12">
             <h1 class="text-center">Annonce {{ ad.title }}</h1>
             <h2 class="text-center">L'utilisateur {{ ad.creator.username }} {{ ad.type.label }}</h2>
+            <h3 class="text-center">{{ ad.name }}</h3>
             <div class="px-3">Créée le : {{ ad.createdAt|date("m/d/Y à H:m") }}</div>
             <div class="px-3">Dernière mise à jour : {{ ad.updatedAt|date("m/d/Y à H:m") }}</div>
-            {% if ad.price and ad.exchange %}
+            {% if ad.type.id == 3 %}
                 <div class="px-3">Échange contre "{{ ad.exchange }}" ou vend {{ ad.price }}€</div>
+            {% elseif ad.type.id == 2 %}
+                <div class="px-3">Vend {{ ad.price }}€</div>
+            {% elseif ad.type.id == 1 %}
+                <div class="px-3">Échange contre "{{ ad.exchange }}"</div>
             {% endif %}
             <div class="row my-2 px-3">
                 <div class="col-5">
