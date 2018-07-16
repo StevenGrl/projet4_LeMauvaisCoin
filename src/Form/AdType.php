@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,6 +49,21 @@ class AdType extends AbstractType
 //                'label' => 'Images bonus',
 //                'required' => false,
 //            ))
+            ->add('price', IntegerType::class, array(
+                'label' => false,
+                'required' => false,
+                'scale' => 2,
+                'attr' => array(
+                    'placeholder' => 'Prix'
+                ),
+            ))
+            ->add('exchange', TextType::class, array(
+                'label' => false,
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Échange'
+                ),
+            ))
             ->add('type', EntityType::class, array(
                 'class' => Type::class,
                 'choice_label' => 'label',

@@ -72,6 +72,16 @@ class Ad
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $exchange;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -209,6 +219,30 @@ class Ad
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getExchange(): ?string
+    {
+        return $this->exchange;
+    }
+
+    public function setExchange(?string $exchange): self
+    {
+        $this->exchange = $exchange;
 
         return $this;
     }

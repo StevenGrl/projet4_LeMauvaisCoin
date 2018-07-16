@@ -3,40 +3,35 @@
 {% block title %}Ad{% endblock %}
 
 {% block body %}
-    <h1>Ad</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ad.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ ad.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ ad.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ ad.image }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ ad.createdAt ? ad.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ ad.updatedAt ? ad.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('ad_index') }}">back to list</a>
-
-    <a href="{{ path('ad_edit', {'id': ad.id}) }}">edit</a>
-
-    {{ include('ad/_delete_form.html.twig') }}
+    <div class="row">
+        <div class="shadow my-5 py-5 justify-content-center col-12">
+            <h1 class="text-center">Annonce {{ ad.title }}</h1>
+            <h2 class="text-center">L'utilisateur {{ ad.creator.username }} {{ ad.type.label }}</h2>
+            <div class="px-3">Créée le : {{ ad.createdAt|date("m/d/Y à H:m") }}</div>
+            <div class="px-3">Dernière mise à jour : {{ ad.updatedAt|date("m/d/Y à H:m") }}</div>
+            {% if ad.price and ad.exchange %}
+                <div class="px-3">Échange contre "{{ ad.exchange }}" ou vend {{ ad.price }}€</div>
+            {% endif %}
+            <div class="row my-2 px-3">
+                <div class="col-5">
+                    <img class="img-fluid" src="{{ asset('images/upload/' ~ ad.image) }}" alt="">
+                </div>
+                <div class="col-6">
+                    <p>Description :</p>
+                    <p>{{ ad.description }}</p>
+                </div>
+            </div>
+            <div class="col">
+                <a href="{{ path('ad_index') }}" class="btn btn-dark"><i class="fas fa-chevron-left"></i> Retour</a>
+                {% if app.user == ad.creator %}
+                    <div class="float-right">
+                        <a href="{{ path('ad_edit', {'id': ad.id}) }}" class="btn btn-primary d-inline-block mr-5">
+                            Modifier <i class="fas fa-pen-fancy"></i>
+                        </a>
+                        {{ include('ad/_delete_form.html.twig') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
