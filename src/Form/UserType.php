@@ -19,7 +19,8 @@ class UserType extends AbstractType
             ->add('username', TextType::class, array(
                 'label' => false,
                 'attr' => array(
-                    'placeholder' => 'Identifiant'
+                    'placeholder' => 'Identifiant',
+                    'autofocus' => true,
                 )))
             ->add('lastName', TextType::class, array(
                 'label' => false,
