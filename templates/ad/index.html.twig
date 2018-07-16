@@ -1,43 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ad index{% endblock %}
+{% block title %}Liste des annonces{% endblock %}
+
+{#{% block stylesheets %}#}
+    {#<link rel="stylesheet" href="{{ asset('build/css/ad.css') }}">#}
+{#{% endblock %}#}
 
 {% block body %}
-    <h1>Ad index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ad in ads %}
-            <tr>
-                <td>{{ ad.id }}</td>
-                <td>{{ ad.title }}</td>
-                <td>{{ ad.description }}</td>
-                <td>{{ ad.image }}</td>
-                <td>{{ ad.createdAt ? ad.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ ad.updatedAt ? ad.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('ad_show', {'id': ad.id}) }}">show</a>
-                    <a href="{{ path('ad_edit', {'id': ad.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('ad_new') }}">Create new</a>
+    <h1 class="text-center">Liste des annonces</h1>
+    <div class="row">
+        {% include 'ad/ads.html.twig' %}
+    </div>
 {% endblock %}

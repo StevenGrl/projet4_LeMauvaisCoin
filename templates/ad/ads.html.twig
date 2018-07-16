@@ -1,0 +1,36 @@
+{% if ads is not empty %}
+    {% for ad in ads %}
+        <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
+            <div class="card mr-3 mb-4">
+                <a href="{{ path('ad_show', { 'id': ad.id })}}">
+                    <div class="overlay">
+                        <img class="card-img-top image"
+                             src="{{ asset('images/upload/' ~ ad.image) }}"
+                             alt="{{ ad.title }}">
+                        <span class="text-description p-1">
+                            {% if ad.description|length > 150 %}
+                                {{ ad.description|slice(0, 150) ~ '...' }}
+                            {% else %}
+                                {{ ad.description }}
+                            {% endif %}
+                        </span>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h2 class="text-center">
+                            {% if ad.title|length > 20 %}
+                                {{ ad.title|slice(0, 20) ~ '...' }}
+                            {% else %}
+                                {{ ad.title }}
+                            {% endif %}
+                        </h2>
+                        <h3 class="mt-2">Ville : {{ ad.creator.city }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="text-center col-12">Aucune annonce n'a été trouvée</p>
+{% endif %}
