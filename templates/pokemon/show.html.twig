@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokemon{% endblock %}
+
+{% block body %}
+    <h1>Pokemon</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pokemon.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ pokemon.name }}</td>
+            </tr>
+            <tr>
+                <th>Type1</th>
+                <td>{{ pokemon.type1 }}</td>
+            </tr>
+            <tr>
+                <th>Type2</th>
+                <td>{{ pokemon.type2 }}</td>
+            </tr>
+            <tr>
+                <th>Pv</th>
+                <td>{{ pokemon.pv }}</td>
+            </tr>
+            <tr>
+                <th>Attack</th>
+                <td>{{ pokemon.attack }}</td>
+            </tr>
+            <tr>
+                <th>Defense</th>
+                <td>{{ pokemon.defense }}</td>
+            </tr>
+            <tr>
+                <th>Speed</th>
+                <td>{{ pokemon.speed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('pokemon_index') }}">back to list</a>
+{% endblock %}

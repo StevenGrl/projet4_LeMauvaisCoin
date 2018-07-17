@@ -51,6 +51,11 @@ class Pokemon
      */
     private $speed;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $image;
+
     public function getId()
     {
         return $this->id;
@@ -136,6 +141,18 @@ class Pokemon
     public function setSpeed(int $speed): self
     {
         $this->speed = $speed;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
