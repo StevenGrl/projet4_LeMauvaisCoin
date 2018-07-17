@@ -27,11 +27,11 @@
                         </h2>
                         <h3 class="mt-2">Article : {{ ad.name }}</h3>
                         <h3 class="mt-2">Ville : {{ ad.creator.city }}</h3>
-                        {% if ad.type.id == 3 %}
+                        {% if ad.type.personalId == 3 %}
                         <h3 class="mt-2">Échange : {{ ad.exchange }} ou {{ ad.price }}€</h3>
-                        {% elseif ad.type.id == 2 %}
+                        {% elseif ad.type.personalId == 2 %}
                             <h3 class="mt-2">Prix : {{ ad.price }}€</h3>
-                        {% elseif ad.type.id == 1 %}
+                        {% elseif ad.type.personalId == 1 %}
                             <h3 class="mt-2">Échange : {{ ad.exchange }}</h3>
                         {% endif %}
                     </div>
