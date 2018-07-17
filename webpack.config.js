@@ -16,7 +16,7 @@ Encore
     .addEntry('js/upload', './assets/js/upload.js')
     .addStyleEntry('css/main', './assets/scss/main.scss')
     .addStyleEntry('css/backToTop', './assets/scss/backToTop.scss')
-    .addStyleEntry('css/ad', './assets/scss/ad.scss')
+    .addStyleEntry('css/card', './assets/scss/card.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()
