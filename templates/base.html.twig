@@ -7,12 +7,15 @@
         <link rel="icon" type="image/png" href="{{ asset('images/favico.png') }}" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
         <link rel="stylesheet" href="{{ asset('build/css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/backToTop.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">LeCoinDesDealers</a>
+            <a class="navbar-brand col-2" href="{{ path('homepage') }}">
+                LeCoinDesDresseurs <img class="pokeball" src="{{ asset('images/pokeball.png') }}" alt="">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,6 +56,13 @@
                     </li>
                     {% else %}
                     <li class="nav-item
+                    {% if app.request.attributes.get('_route') == 'pokemon_index' %}
+                    active
+                    {% endif %}
+                    ">
+                        <a href="{{ path('pokemon_index') }}" class="nav-link">Mon pokédex</a>
+                    </li>
+                    <li class="nav-item
                     {% if app.request.attributes.get('_route') == 'ad_new' %}
                     active
                     {% endif %}
@@ -85,7 +95,7 @@
             </div>
         </nav>
         {% block content %}
-        <div class="container">
+        <div class="container" id="content">
             <div class="row">
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
@@ -98,7 +108,9 @@
             {% block body %}{% endblock %}
         </div>
         {% endblock %}
+        <a href="#" id="scrollBtn" class="cd-top js-cd-top">Top</a>
         <script src="{{ asset('build/js/app.js') }}"></script>
+        <script src="{{ asset('build/js/backToTop.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

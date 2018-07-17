@@ -12,8 +12,10 @@ Encore
 
     // uncomment to define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/backToTop', './assets/js/backToTop.js')
     .addEntry('js/upload', './assets/js/upload.js')
     .addStyleEntry('css/main', './assets/scss/main.scss')
+    .addStyleEntry('css/backToTop', './assets/scss/backToTop.scss')
     .addStyleEntry('css/ad', './assets/scss/ad.scss')
 
     // uncomment if you use Sass/SCSS files
