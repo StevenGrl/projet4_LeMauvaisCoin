@@ -19,6 +19,11 @@ class Type
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $personalId;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $label;
@@ -77,6 +82,18 @@ class Type
                 $ad->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPersonalId(): ?int
+    {
+        return $this->personalId;
+    }
+
+    public function setPersonalId(int $personalId): self
+    {
+        $this->personalId = $personalId;
 
         return $this;
     }
