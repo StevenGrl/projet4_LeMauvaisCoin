@@ -9,6 +9,13 @@
         {{ form_row(form.description) }}
     </div>
     <div class="form-group offset-2 col-8">
+        {% if ad.image %}
+            <img id="image-pokemon" class="img-fluid" src="{{ asset('images/upload/' ~ ad.image) }}" alt="">
+        {% else %}
+            <img id="image-pokemon" class="img-fluid" src="{{ asset('images/default.jpg') }}" alt="">
+        {% endif %}
+    </div>
+    <div class="form-group offset-2 col-8">
         {{ form_row(form.imageFile) }}
     </div>
     <div class="form-group offset-2 col-8">
