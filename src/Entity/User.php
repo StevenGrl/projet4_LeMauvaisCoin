@@ -72,7 +72,7 @@ class User implements UserInterface, \Serializable
     private $ads;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Pokemon")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Pokemon", inversedBy="users")
      */
     private $pokemons;
 

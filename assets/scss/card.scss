@@ -24,6 +24,7 @@
     }
   }
   img {
+    object-fit: contain;
     max-height: 160px;
   }
   h2 {
@@ -31,6 +32,19 @@
   }
   h3 {
     font-size: calc(10px + 8 * (40vw - 220px) / 1800);
+  }
+  .owned {
+    .red {
+      color: red;
+      font-size: 35px;
+    }
+    .green {
+      color: green;
+      font-size: 35px;
+    }
+    .img-pokeball {
+      max-width: 15%;
+    }
   }
 }
 
