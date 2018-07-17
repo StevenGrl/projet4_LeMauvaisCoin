@@ -71,6 +71,11 @@ class User implements UserInterface, \Serializable
      */
     private $ads;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Pokemon")
+     */
+    private $pokemons;
+
     public function __toString()
     {
         return (string)$this->id;
@@ -79,6 +84,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->ads = new ArrayCollection();
+        $this->pokemons = new ArrayCollection();
     }
 
     public function getId()
@@ -225,5 +231,31 @@ class User implements UserInterface, \Serializable
 
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * @return Collection|Pokemon[]
+     */
+    public function getPokemons(): Collection
+    {
+        return $this->pokemons;
+    }
+
+    public function addPokemon(Pokemon $pokemon): self
+    {
+        if (!$this->pokemons->contains($pokemon)) {
+            $this->pokemons[] = $pokemon;
+        }
+
+        return $this;
+    }
+
+    public function removePokemon(Pokemon $pokemon): self
+    {
+        if ($this->pokemons->contains($pokemon)) {
+            $this->pokemons->removeElement($pokemon);
+        }
+
+        return $this;
     }
 }
