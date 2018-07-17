@@ -38,5 +38,6 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/pokemon, roles: ROLE_USER }
         - { path: /edit, roles: ROLE_USER }
         - { path: /new, roles: ROLE_USER }

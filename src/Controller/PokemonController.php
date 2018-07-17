@@ -33,9 +33,7 @@ class PokemonController extends Controller
             $em->flush();
         }
 
-
         return $this->render('pokemon/index.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
-
     }
 
     /**
@@ -50,9 +48,7 @@ class PokemonController extends Controller
             $em->flush();
         }
 
-
         return $this->render('pokemon/index.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
-
     }
 
     /**

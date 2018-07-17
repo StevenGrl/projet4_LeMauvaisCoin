@@ -62,6 +62,11 @@ class Pokemon
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numPokedex;
+
     public function getId()
     {
         return $this->id;
@@ -185,6 +190,18 @@ class Pokemon
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
         }
+
+        return $this;
+    }
+
+    public function getNumPokedex(): ?int
+    {
+        return $this->numPokedex;
+    }
+
+    public function setNumPokedex(int $numPokedex): self
+    {
+        $this->numPokedex = $numPokedex;
 
         return $this;
     }

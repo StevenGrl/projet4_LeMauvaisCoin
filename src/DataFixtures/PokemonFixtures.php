@@ -20,7 +20,7 @@ class PokemonFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $baseRequest = 'http://ray0.be/pokeapi/pokemon-row/fr/';
-        for ($i = 1; $i < 152; $i++) {
+        for ($i = 1; $i < 494; $i++) {
             $pokemon = new Pokemon();
             $clientInfos = new Client(['base_uri' => $baseRequest . $i]);
             $picked = $clientInfos->request('GET', (string)$i);
@@ -35,6 +35,7 @@ class PokemonFixtures extends Fixture
             $pokemon->setType1($decoded->data->type1);
             $pokemon->setType2($decoded->data->type2);
             $pokemon->setImage('http://ray0.be/pokeapi/pokemon-img/fr/'  . $decoded->data->nom_fr);
+            $pokemon->setNumPokedex($i);
 
             $manager->persist($pokemon);
         }

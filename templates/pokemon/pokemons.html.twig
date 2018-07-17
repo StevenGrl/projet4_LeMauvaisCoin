@@ -1,7 +1,7 @@
 {% if pokemons is not empty %}
     {% for pokemon in pokemons %}
         <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
-            <div class="card mr-3 mb-4">
+            <div id="pokemon{{ pokemon.id }}" class="card mr-3 mb-4">
                 <a href="{{ path('pokemon_show', { 'id': pokemon.id })}}">
                     <div class="overlay">
                         <img class="card-img-top image"
@@ -23,15 +23,19 @@
                 <div class="card-body">
                     <div class="card-title text-center">
                         <h2 class="mb-3">
-                            {{ pokemon.name }}
+                            {{ pokemon.name }} <span class="numPokedex">#{{ pokemon.numPokedex }}</span>
                         </h2>
-                        {%  if pokemon in app.user.pokemons %}
-                            <a class="btn btn-danger" href="{{ path('pokemon_remove', {'pokemon': pokemon.id}) }}">Retirer</a>
+                        {% if app.user and pokemon in app.user.pokemons %}
+                            <a class="btn btn-danger" href="{{ path('pokemon_remove', {'pokemon': pokemon.id}) }}">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
                             <span class="owned">
                                 <img class="img-pokeball" src="{{ asset('images/pokeball.png') }}" alt="">
                             </span>
                         {% else %}
-                            <a class="btn btn-success" href="{{ path('pokemon_add', {'pokemon': pokemon.id}) }}">Ajouter</a>
+                            <a class="btn btn-success" href="{{ path('pokemon_add', {'pokemon': pokemon.id}) }}">
+                                <i class="fas fa-plus"></i>
+                            </a>
                             <span class="owned">
                                 <img class="img-pokeball" src="{{ asset('images/pokeball_grey.png') }}" alt="">
                             </span>

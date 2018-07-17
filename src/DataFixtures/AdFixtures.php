@@ -16,33 +16,66 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < 5; $i++) {
             $creators[] = $this->getReference('user'.$i);
         }
-        for ($i = 0; $i < 11; $i++) {
+        $data = $this->getData();
+        foreach ($data as $pokemon) {
             $ad = new Ad();
-            $ad->setTitle('Ad '.$i);
-            $ad->setName('Ad '.$i);
-            $ad->setImage('13c8b4637de4226b911ef9f595b03299.png');
+            $ad->setTitle($pokemon['title']);
+            $ad->setName($pokemon['name']);
+            $ad->setImage($pokemon['image']);
             $ad->setCreatedAt(new \DateTime());
             $ad->setUpdatedAt(new \DateTime());
-            $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Nulla eu nibh in justo consectetur imperdiet. 
-            Ut at feugiat turpis. Aliquam vitae pellentesque leo. 
-            Vestibulum nunc ex, tempor sit amet lacus ac, pulvinar lacinia ligula. 
-            Phasellus tincidunt sapien tellus, sed elementum neque vestibulum eget. 
-            Aliquam volutpat lobortis quam. In at lacus volutpat, facilisis nibh ac, ornare elit. 
-            Aenean sed libero vitae dolor rhoncus sollicitudin nec vel sapien. Etiam rhoncus ipsum eu velit venenatis, 
-            at tincidunt nibh venenatis. Duis sit amet laoreet eros. 
-            Suspendisse sit amet metus cursus eros consectetur elementum. 
-            Donec vulputate viverra elementum. Nullam maximus pharetra sem, ut vulputate tellus faucibus sit amet.
-            Nullam pharetra eget nulla eget tempus.');
+            $ad->setDescription($pokemon['description']);
             $ad->setType($types[rand(0,2)]);
             $ad->setCreator($creators[rand(0,4)]);
-            $ad->setPrice(69.69);
-            $ad->setExchange('Pac Girl');
+            $ad->setPrice($pokemon['price']);
+            $ad->setExchange($pokemon['exchange']);
 
             $manager->persist($ad);
         }
 
         $manager->flush();
+    }
+
+    public function getData()
+    {
+        return [
+            [
+                'title' => 'Noctali, 5mois, neon bleu',
+                'description' => 'Je vend ma noctali femelle de 5 mois car j\'arrive pu à dormir 
+                la nuit elle squatte la chambre et avec ses néons bleu c\'est chaud !',
+                'image' => '3ffbf6e9a12f0b0e263d21c8a3c7bf21.jpeg',
+                'price' => 35,
+                'exchange' => 'N\'importe quoi qui fait pas de lumière et qui prend pas trop de place',
+                'name' => 'Noctali',
+            ],
+            [
+                'title' => 'Couple de pikachu',
+                'description' => 'Je vend mon couple de pikachu car ils arrêtent pas la nuit ça m\'empêche de dormir 
+                et comme avec mon compagnon on fait plus rien ça me frustre à mort !',
+                'image' => '9660be3d6cb28d6d209a6ab8fb9b8879.jpeg',
+                'price' => 69.69,
+                'exchange' => NULL,
+                'name' => 'Pikachu',
+            ],
+            [
+                'title' => 'Tiplouf mâle',
+                'description' => 'Je voulais une femelle et j\'ai eu un mâle,
+                 alors je le vend ou je l\'échange contre une femelle !',
+                'image' => 'ffe22600b42dbd4753faacc6d44c90ab.png',
+                'price' => 37.99,
+                'exchange' => 'Tiplouf femelle',
+                'name' => 'Tiplouf',
+            ],
+            [
+                'title' => 'Pétasse d\'évolie',
+                'description' => 'C\'est une chaudasse qui aime aller chez les voisins, comme j\'arrive pas à la calmer
+                 je la vend car j\'ai pas envie de me retrouver avec une portée sur les bras !',
+                'image' => '61ab5688e525dad43e9f1a43892e00b5.jpeg',
+                'price' => 26.99,
+                'exchange' => NULL,
+                'name' => 'Evolie',
+            ],
+        ];
     }
 
     public function getDependencies()
