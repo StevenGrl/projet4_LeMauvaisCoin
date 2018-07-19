@@ -15,9 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class PokemonController extends Controller
 {
     /**
-     * @Route("/", name="pokemon_index", methods="GET|POST")
+     * @Route("/pokedex/{page}/{searchBy}/{toSearch}", name="pokemon_index", methods="GET|POST")
      */
-    public function index(Request $request, PokemonRepository $pokemonRepository): Response
+    public function index(int $page = 1, ?string $searchBy = null, ?string $toSearch = null,
+                          Request $request, PokemonRepository $pokemonRepository): Response
     {
         $form = $this->createForm('App\Form\SearchType');
 
@@ -25,20 +26,35 @@ class PokemonController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $pokemonSearched = $data['toSearch'];
+            $toSearch = $data['toSearch'];
             $searchBy = $data['searchBy'];
-            $pokemons = $pokemonRepository->findByLike($searchBy, $pokemonSearched);
+            $page = 1;
 
-            return $this->render('pokemon/index.html.twig', [
-                'pokemons' => $pokemons,
-                'pokemonSearched' => $pokemonSearched,
-                'form' => $form->createView(),
+            return $this->redirectToRoute('pokemon_index', [
+                'page' => $page,
+                'searchBy' => $searchBy,
+                'toSearch' => $toSearch,
             ]);
         }
 
+        if ($searchBy and $toSearch) {
+            $pokemons = $pokemonRepository->findByLike($searchBy, $toSearch, $page * 20 - 20);
+            $nbPokemons = count($pokemons);
+        } else {
+            $pokemons = $pokemonRepository->findBy([], [], 20, $page * 20 - 20);
+            $nbPokemons = $pokemonRepository->count([]);
+        }
+
+        $lastPage = floor($nbPokemons / 20 + 1);
+
         return $this->render('pokemon/index.html.twig', [
-            'pokemons' => $pokemonRepository->findAll(),
+            'pokemons' => $pokemons,
             'form' => $form->createView(),
+            'page' => $page,
+            'searchBy' => $searchBy,
+            'toSearch' => $toSearch,
+            'lastPage' => $lastPage,
+            'nbPokemons' => $nbPokemons,
         ]);
     }
 
@@ -73,7 +89,7 @@ class PokemonController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="pokemon_show", methods="GET")
+     * @Route("/fiche/{numPokedex}", name="pokemon_show", methods="GET")
      */
     public function show(Pokemon $pokemon): Response
     {

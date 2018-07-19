@@ -1,0 +1,10 @@
+.pagination > li.disabled > a:hover,
+.pagination > li.disabled > a:focus {
+  cursor: not-allowed;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Pokemon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -23,7 +24,7 @@ class PokemonRepository extends ServiceEntityRepository
      * @return Pokemon[] Returns an array of Pokemon objects
      */
 
-    public function findByLike(string $searchedBy, string $value)
+    public function findByLike(string $searchedBy, string $value, $firstResult, $maxResults = 20)
     {
         $query = $this->createQueryBuilder('p');
         if ($searchedBy === 'name') {
@@ -34,9 +35,12 @@ class PokemonRepository extends ServiceEntityRepository
         } else {
             $query->where('p.numPokedex LIKE :val');
         }
-        $query->setParameter('val', '%' . $value . '%');
+        $query->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->setParameter('val', '%' . $value . '%');
+        $pag = new Paginator($query);
 
-        return $query->getQuery()->getResult();
+        return $pag;
     }
 
 

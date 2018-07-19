@@ -1,5 +1,5 @@
 <div id="pokemon{{ pokemon.id }}" class="card card-pokemon mr-3 mb-4">
-    <a href="{{ path('pokemon_show', { 'id': pokemon.id })}}">
+    <a href="{{ path('pokemon_show', { 'numPokedex': pokemon.numPokedex })}}">
         <div class="overlay">
             <img class="card-img-top image"
                  src="{{ pokemon.image }}"
