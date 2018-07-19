@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pokemon;
 use App\Repository\PokemonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,11 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class PokemonController extends Controller
 {
     /**
-     * @Route("/", name="pokemon_index", methods="GET")
+     * @Route("/", name="pokemon_index", methods="GET|POST")
      */
-    public function index(PokemonRepository $pokemonRepository): Response
+    public function index(Request $request, PokemonRepository $pokemonRepository): Response
     {
-        return $this->render('pokemon/index.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
+        $form = $this->createForm('App\Form\SearchType');
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $pokemonSearched = $data['toSearch'];
+            $searchBy = $data['searchBy'];
+            $pokemons = $pokemonRepository->findByLike($searchBy, $pokemonSearched);
+
+            return $this->render('pokemon/index.html.twig', [
+                'pokemons' => $pokemons,
+                'pokemonSearched' => $pokemonSearched,
+                'form' => $form->createView(),
+            ]);
+        }
+
+        return $this->render('pokemon/index.html.twig', [
+            'pokemons' => $pokemonRepository->findAll(),
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

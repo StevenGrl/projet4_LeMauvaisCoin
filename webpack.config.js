@@ -18,6 +18,7 @@ Encore
     .addStyleEntry('css/main', './assets/scss/main.scss')
     .addStyleEntry('css/backToTop', './assets/scss/backToTop.scss')
     .addStyleEntry('css/card', './assets/scss/card.scss')
+    .addStyleEntry('css/searchBar', './assets/scss/searchBar.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()

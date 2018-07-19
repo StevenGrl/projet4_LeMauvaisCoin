@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/css/card.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/searchBar.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -14,6 +15,25 @@
     <div class="row my-5 py-3 justify-content-center">
         <div class="col-8 py-3">
             <h1 class="text-center">Mon pokédex</h1>
+            <hr class="col-6">
+            <div class="searchBar shadow p-3 mx-auto col-md-8 mt-4">
+                <h2 class="text-center">Rechercher un pokémon</h2>
+                <div class="col-8 offset-2">
+                    <hr>
+                </div>
+                {{ form_start(form) }}
+                <div class="form-inline justify-content-center pb-1">
+                    <div class="col-12 text-center pb-1">Rechercher sur le champ :</div>
+                    <div class="col-12">
+                        {{ form_widget(form.searchBy, {'attr': {'class': 'form-inline justify-content-center pb-2'}}) }}
+                    </div>
+                    {{ form_row(form.toSearch) }}
+                    <button type="submit" id="search" title="lancer la recherche" class="btn btn-danger ml-1">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
             <hr class="col-6">
         </div>
     </div>
