@@ -1,0 +1,43 @@
+<div id="pokemon{{ pokemon.id }}" class="card mr-3 mb-4">
+    <a href="{{ path('pokemon_show', { 'id': pokemon.id })}}">
+        <div class="overlay">
+            <img class="card-img-top image"
+                 src="{{ pokemon.image }}"
+                 alt="">
+            <span class="text-description p-1">
+                        <p>HP : {{ pokemon.pv }}<br>
+                        Attaque : {{ pokemon.attack }}<br>
+                        Défense : {{ pokemon.speed }}<br>
+                        Vitesse : {{ pokemon.defense }}<br>
+                        Type 1 : {{ pokemon.type1 }}<br>
+                            {% if pokemon.type2 %}
+                                Type 2 : {{ pokemon.type2 }}
+                            {% endif %}
+                        </p>
+                    </span>
+        </div>
+    </a>
+    <hr>
+    <div class="card-body">
+        <div class="card-title text-center">
+            <h2 class="mb-3">
+                {{ pokemon.name }} <span class="numPokedex">#{{ pokemon.numPokedex }}</span>
+            </h2>
+            {% if app.user and pokemon in app.user.pokemons %}
+                <a class="btn btn-danger rm" data-pokemon-id="{{ pokemon.id }}" href="#">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+                <span class="owned">
+                    <img class="img-pokeball" src="{{ asset('images/pokeball.png') }}" alt="">
+                </span>
+            {% else %}
+                <a class="btn btn-success add" data-pokemon-id="{{ pokemon.id }}" href="#">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <span class="owned">
+                    <img class="img-pokeball" src="{{ asset('images/pokeball_grey.png') }}" alt="">
+                </span>
+            {% endif %}
+        </div>
+    </div>
+</div>

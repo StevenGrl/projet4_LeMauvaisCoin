@@ -13,6 +13,7 @@ Encore
     // uncomment to define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/backToTop', './assets/js/backToTop.js')
+    .addEntry('js/pokedex', './assets/js/pokedex.js')
     .addEntry('js/upload', './assets/js/upload.js')
     .addStyleEntry('css/main', './assets/scss/main.scss')
     .addStyleEntry('css/backToTop', './assets/scss/backToTop.scss')

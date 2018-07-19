@@ -1,6 +1,9 @@
+@import 'main.scss';
+
 .card {
   width: 16rem;
   transition: 0.5s ease;
+  border-color: $primary;
   .overlay {
     bottom: 32%;
     .text-description {

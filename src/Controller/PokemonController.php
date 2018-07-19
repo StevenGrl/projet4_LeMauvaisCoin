@@ -24,7 +24,7 @@ class PokemonController extends Controller
     /**
      * @Route("/add/{pokemon}", name="pokemon_add", methods="GET")
      */
-    public function addPokemon(Pokemon $pokemon, PokemonRepository $pokemonRepository): Response
+    public function addPokemon(Pokemon $pokemon): Response
     {
         $user = $this->getUser();
         if ($user) {
@@ -33,13 +33,13 @@ class PokemonController extends Controller
             $em->flush();
         }
 
-        return $this->render('pokemon/index.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
+        return $this->render('pokemon/pokemon.html.twig', ['pokemon' => $pokemon]);
     }
 
     /**
      * @Route("/remove/{pokemon}", name="pokemon_remove", methods="GET")
      */
-    public function removePokemon(Pokemon $pokemon, PokemonRepository $pokemonRepository): Response
+    public function removePokemon(Pokemon $pokemon): Response
     {
         $user = $this->getUser();
         if ($user) {
@@ -48,7 +48,7 @@ class PokemonController extends Controller
             $em->flush();
         }
 
-        return $this->render('pokemon/index.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
+        return $this->render('pokemon/pokemon.html.twig', ['pokemon' => $pokemon]);
     }
 
     /**
