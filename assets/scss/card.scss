@@ -3,7 +3,6 @@
 .card {
   width: 16rem;
   transition: 0.5s ease;
-  border-color: $primary;
   .overlay {
     bottom: 32%;
     .text-description {
@@ -27,7 +26,7 @@
     }
   }
   img {
-    object-fit: contain;
+    object-fit: cover;
     max-height: 160px;
   }
   h2 {
@@ -54,3 +53,15 @@
   }
 }
 
+.card-pokemon {
+  border-color: $primary;
+  img {
+    object-fit: contain;
+  }
+  .img-stats {
+    width: 13%;
+  }
+  .card-body-pokemon {
+    padding: 0rem;
+  }
+}

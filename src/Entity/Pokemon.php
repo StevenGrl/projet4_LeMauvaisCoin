@@ -67,6 +67,16 @@ class Pokemon
      */
     private $numPokedex;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imageType1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageType2;
+
     public function getId()
     {
         return $this->id;
@@ -202,6 +212,30 @@ class Pokemon
     public function setNumPokedex(int $numPokedex): self
     {
         $this->numPokedex = $numPokedex;
+
+        return $this;
+    }
+
+    public function getImageType1(): ?string
+    {
+        return $this->imageType1;
+    }
+
+    public function setImageType1(string $imageType1): self
+    {
+        $this->imageType1 = $imageType1;
+
+        return $this;
+    }
+
+    public function getImageType2(): ?string
+    {
+        return $this->imageType2;
+    }
+
+    public function setImageType2(?string $imageType2): self
+    {
+        $this->imageType2 = $imageType2;
 
         return $this;
     }

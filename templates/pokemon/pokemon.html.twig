@@ -1,28 +1,27 @@
-<div id="pokemon{{ pokemon.id }}" class="card mr-3 mb-4">
+<div id="pokemon{{ pokemon.id }}" class="card card-pokemon mr-3 mb-4">
     <a href="{{ path('pokemon_show', { 'id': pokemon.id })}}">
         <div class="overlay">
             <img class="card-img-top image"
                  src="{{ pokemon.image }}"
                  alt="">
-            <span class="text-description p-1">
-                        <p>HP : {{ pokemon.pv }}<br>
-                        Attaque : {{ pokemon.attack }}<br>
-                        Défense : {{ pokemon.speed }}<br>
-                        Vitesse : {{ pokemon.defense }}<br>
-                        Type 1 : {{ pokemon.type1 }}<br>
-                            {% if pokemon.type2 %}
-                                Type 2 : {{ pokemon.type2 }}
-                            {% endif %}
-                        </p>
-                    </span>
         </div>
     </a>
     <hr>
-    <div class="card-body">
+    <div class="card-body card-body-pokemon">
         <div class="card-title text-center">
             <h2 class="mb-3">
                 {{ pokemon.name }} <span class="numPokedex">#{{ pokemon.numPokedex }}</span>
             </h2>
+            <p>
+                <img class="img-stats" src="https://png.icons8.com/cotton/50/000000/hearts.png" alt="HP">{{ pokemon.pv }}
+                <img class="img-stats" src="https://png.icons8.com/color/50/000000/sword.png" alt="Attack">{{ pokemon.attack }}
+                <img class="img-stats" src="https://png.icons8.com/color/50/000000/shield.png" alt="Defense">{{ pokemon.defense }}
+                <img class="img-stats" src="https://png.icons8.com/dusk/50/000000/speed.png" alt="speed">{{ pokemon.speed }}
+                <img class="img-stats" src="{{ asset('images/types/' ~ pokemon.imageType1 ) }}" alt="">
+                {% if pokemon.type2 %}
+                    <img class="img-stats" src="{{ asset('images/types/' ~ pokemon.imageType2 ) }}" alt="">
+                {% endif %}
+            </p>
             {% if app.user and pokemon in app.user.pokemons %}
                 <a class="btn btn-danger rm" data-pokemon-id="{{ pokemon.id }}" href="#">
                     <i class="far fa-trash-alt"></i>

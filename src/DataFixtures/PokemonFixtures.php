@@ -33,7 +33,9 @@ class PokemonFixtures extends Fixture
             $pokemon->setDefense($decoded->data->stat_defense);
             $pokemon->setSpeed($decoded->data->stat_vitesse);
             $pokemon->setType1($decoded->data->type1);
+            $pokemon->setImageType1($decoded->data->type1 . '.png');
             $pokemon->setType2($decoded->data->type2);
+            $pokemon->setImageType2($decoded->data->type2 . '.png');
             $pokemon->setImage('http://ray0.be/pokeapi/pokemon-img/fr/'  . $decoded->data->nom_fr);
             $pokemon->setNumPokedex($i);
 
