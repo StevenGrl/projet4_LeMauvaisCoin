@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Pokemon;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -38,6 +39,23 @@ class PokemonRepository extends ServiceEntityRepository
         $query->setFirstResult($firstResult)
             ->setMaxResults($maxResults)
             ->setParameter('val', '%' . $value . '%');
+        $pag = new Paginator($query);
+
+        return $pag;
+    }
+
+    public function findByUser(User $user, bool $have,int $firstResult, int $maxResults = 20)
+    {
+        $query = $this->createQueryBuilder('p')
+                    ->join('p.user', 'u');
+        if ($have) {
+            $query->where('p.user NOT IN :user');
+        } else {
+            $query->where('p.user IN :user');
+        }
+        $query->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->setParameter('user', $user->getId());
         $pag = new Paginator($query);
 
         return $pag;

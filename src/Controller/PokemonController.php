@@ -45,7 +45,15 @@ class PokemonController extends Controller
             $nbPokemons = $pokemonRepository->count([]);
         }
 
-        $lastPage = floor($nbPokemons / 20 + 1);
+        $pokemonsUser = $pokemonRepository->findByUser($this->getUser(), true, $page * 20 - 20);
+
+        $nbPokemonsUser = count($pokemonsUser);
+
+        var_dump($nbPokemonsUser); die();
+
+        $pokemonsNotOwned = array_diff($pokemons, $this->getUser()->getPokemons()->toArray());
+
+        $nbPokemonsNotOwned = count($pokemonsNotOwned);
 
         return $this->render('pokemon/index.html.twig', [
             'pokemons' => $pokemons,
@@ -53,8 +61,10 @@ class PokemonController extends Controller
             'page' => $page,
             'searchBy' => $searchBy,
             'toSearch' => $toSearch,
-            'lastPage' => $lastPage,
             'nbPokemons' => $nbPokemons,
+            'nbPokemonsUser' => $nbPokemonsUser,
+            'pokemonsNotOwned' => $pokemonsNotOwned,
+            'nbPokemonsNotOwned' => $nbPokemonsNotOwned,
         ]);
     }
 
