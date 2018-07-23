@@ -6,55 +6,53 @@
             </div>
         {% endif %}
     {% endfor %}
-    {% if nbPokemons > 20 %}
-        {% set lastPage = (nbPokemons / 20 + 1)|round(0, 'floor') %}
-        <div class="col-12">
-            <div class="row justify-content-center mb-5">
-                <nav aria-label="page navigation">
-                    <ul class="pagination">
-                        {% if page == 1 %}
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">
-                                    &laquo;
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ path('pokemon_index',
-                                    {'page': page - 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
-                                    &laquo;
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% for i in 1..25 if i <= lastPage %}
-                        <li class="page-item
-                            {% if page == i %}
-                                active
-                            {% endif %}
-                        ">
-                            <a class="page-link" id="page{{ i }}" href="{{ path('pokemon_index',
-                                                {'page': i, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
-                                {{ i }}
+    {% set lastPage = (nbPokemons / 20 + 1)|round(0, 'floor') %}
+    <div class="col-12">
+        <div class="row justify-content-center mb-5">
+            <nav aria-label="page navigation">
+                <ul class="pagination">
+                    {% if page == 1 %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">
+                                &laquo;
                             </a>
                         </li>
-                        {% endfor %}
-                        {% if page == lastPage %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">&raquo;</a>
-                        </li>
-                        {% else %}
+                    {% else %}
                         <li class="page-item">
                             <a class="page-link" href="{{ path('pokemon_index',
-                                {'page': page + 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
-                                &raquo;
+                                {'page': page - 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
+                                &laquo;
                             </a>
                         </li>
+                    {% endif %}
+                    {% for i in 1..25 if i <= lastPage %}
+                    <li class="page-item
+                        {% if page == i %}
+                            active
                         {% endif %}
-                    </ul>
-                </nav>
-            </div>
+                    ">
+                        <a class="page-link" id="page{{ i }}" href="{{ path('pokemon_index',
+                                            {'page': i, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
+                            {{ i }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                    {% if page == lastPage %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">&raquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path('pokemon_index',
+                            {'page': page + 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
+                            &raquo;
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
-    {% endif %}
+    </div>
 {% else %}
     <p class="text-center col-12">Aucun pokémon n'a été trouvé</p>
 {% endif %}
