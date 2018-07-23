@@ -1,10 +1,13 @@
 {% if pokemons is not empty %}
     {% for pokemon in pokemons %}
-    <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
-        {% include 'pokemon/pokemon.html.twig' %}
-    </div>
+        {% if loop.index <= 20 %}
+            <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
+                {% include 'pokemon/pokemon.html.twig' %}
+            </div>
+        {% endif %}
     {% endfor %}
     {% if nbPokemons > 20 %}
+        {% set lastPage = (nbPokemons / 20 + 1)|round(0, 'floor') %}
         <div class="col-12">
             <div class="row justify-content-center mb-5">
                 <nav aria-label="page navigation">
@@ -18,7 +21,7 @@
                         {% else %}
                             <li class="page-item">
                                 <a class="page-link" href="{{ path('pokemon_index',
-                                    {'page': page - 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}">
+                                    {'page': page - 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
                                     &laquo;
                                 </a>
                             </li>
@@ -29,8 +32,8 @@
                                 active
                             {% endif %}
                         ">
-                            <a class="page-link" href="{{ path('pokemon_index',
-                                                {'page': i, 'searchBy': searchBy, 'toSearch': toSearch}) }}">
+                            <a class="page-link" id="page{{ i }}" href="{{ path('pokemon_index',
+                                                {'page': i, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
                                 {{ i }}
                             </a>
                         </li>
@@ -42,7 +45,7 @@
                         {% else %}
                         <li class="page-item">
                             <a class="page-link" href="{{ path('pokemon_index',
-                                {'page': page + 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}">
+                                {'page': page + 1, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
                                 &raquo;
                             </a>
                         </li>

@@ -40,12 +40,22 @@ class PokemonController extends Controller
         if ($searchBy and $toSearch) {
             $pokemons = $pokemonRepository->findByLike($searchBy, $toSearch, $page * 20 - 20);
             $nbPokemons = count($pokemons);
+
+            $pokemonsUser = $pokemonRepository->findByUser($this->getUser(), true, $page * 20 - 20, $searchBy, $toSearch);
+            $nbPokemonsUser = count($pokemonsUser);
+
+            $pokemonsNotOwned = $pokemonRepository->findByUser($this->getUser(), false, $page * 20 - 20, $searchBy, $toSearch);
+            $nbPokemonsNotOwned = count($pokemonsNotOwned);
         } else {
             $pokemons = $pokemonRepository->findBy([], [], 20, $page * 20 - 20);
             $nbPokemons = $pokemonRepository->count([]);
-        }
 
-        $lastPage = floor($nbPokemons / 20 + 1);
+            $pokemonsUser = $pokemonRepository->findByUser($this->getUser(), true, $page * 20 - 20);
+            $nbPokemonsUser = count($pokemonsUser);
+
+            $pokemonsNotOwned = $pokemonRepository->findByUser($this->getUser(), false, $page * 20 - 20);
+            $nbPokemonsNotOwned = count($pokemonsNotOwned);
+        }
 
         return $this->render('pokemon/index.html.twig', [
             'pokemons' => $pokemons,
@@ -53,8 +63,11 @@ class PokemonController extends Controller
             'page' => $page,
             'searchBy' => $searchBy,
             'toSearch' => $toSearch,
-            'lastPage' => $lastPage,
             'nbPokemons' => $nbPokemons,
+            'nbPokemonsUser' => $nbPokemonsUser,
+            'pokemonsUser' => $pokemonsUser,
+            'pokemonsNotOwned' => $pokemonsNotOwned,
+            'nbPokemonsNotOwned' => $nbPokemonsNotOwned,
         ]);
     }
 

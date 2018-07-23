@@ -77,6 +77,11 @@ class Pokemon
      */
     private $imageType2;
 
+    public function __toString(): string
+    {
+        return (string)$this->getId();
+    }
+
     public function getId()
     {
         return $this->id;

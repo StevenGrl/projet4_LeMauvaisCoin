@@ -15,11 +15,13 @@ Encore
     .addEntry('js/backToTop', './assets/js/backToTop.js')
     .addEntry('js/pokedex', './assets/js/pokedex.js')
     .addEntry('js/upload', './assets/js/upload.js')
+    .addEntry('js/pills', './assets/js/pills.js')
     .addStyleEntry('css/main', './assets/scss/main.scss')
     .addStyleEntry('css/backToTop', './assets/scss/backToTop.scss')
     .addStyleEntry('css/card', './assets/scss/card.scss')
     .addStyleEntry('css/searchBar', './assets/scss/searchBar.scss')
     .addStyleEntry('css/pagination', './assets/scss/pagination.scss')
+    .addStyleEntry('css/pills', './assets/scss/pills.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()
