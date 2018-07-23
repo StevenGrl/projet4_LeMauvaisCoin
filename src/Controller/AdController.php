@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Repository\StatusRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +20,11 @@ class AdController extends Controller
     /**
      * @Route("/", name="ad_index", methods="GET")
      */
-    public function index(AdRepository $adRepository): Response
+    public function index(AdRepository $adRepository, StatusRepository $statusRepository): Response
     {
-        return $this->render('ad/index.html.twig', ['ads' => $adRepository->findAll()]);
+        $open = $statusRepository->findOneByLabel('Open');
+        $ads = $adRepository->findByStatus($open->getId());
+        return $this->render('ad/index.html.twig', ['ads' => $ads]);
     }
 
     /**
@@ -33,6 +36,18 @@ class AdController extends Controller
             return $this->render('ad/mine.html.twig', ['ads' => $adRepository->findByCreator($this->getUser()->getId())]);
         }
         return $this->render('index.html.twig');
+    }
+
+    /**
+     * @Route("/archive/{id}", name="ad_archive", methods="GET")
+     */
+    public function archive(Ad $ad, StatusRepository $statusRepository): Response
+    {
+        $archive = $statusRepository->findOneByLabel('Archive');
+        $ad->setStatus($archive);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        return $this->redirectToRoute('ad_mine');
     }
 
     /**

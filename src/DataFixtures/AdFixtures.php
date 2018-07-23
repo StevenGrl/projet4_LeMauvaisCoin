@@ -29,6 +29,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
             $ad->setCreator($creators[rand(0,4)]);
             $ad->setPrice($pokemon['price']);
             $ad->setExchange($pokemon['exchange']);
+            $ad->setStatus($this->getReference('open'));
 
             $manager->persist($ad);
         }
@@ -82,6 +83,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         return array(
             UserFixtures::class,
             TypeFixtures::class,
+            StatusFixtures::class,
         );
     }
 }

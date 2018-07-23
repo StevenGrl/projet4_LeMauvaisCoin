@@ -19,7 +19,9 @@
                     <i class="fas fa-chevron-left"></i> Retourner à l'annonce
                 </a>
                 <div class="float-right">
-                {{ include('ad/_delete_form.html.twig') }}
+                    <a href="{{ path('ad_archive', {'id': ad.id}) }}" class="btn btn-warning d-inline-block mr-5">
+                        Archiver <i class="fas fa-archive"></i>
+                    </a>
                 </div>
             </div>
         </div>
