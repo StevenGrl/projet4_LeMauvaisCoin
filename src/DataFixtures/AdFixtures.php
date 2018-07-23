@@ -42,7 +42,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
             [
                 'title' => 'Noctali, 5mois, neon bleu',
                 'description' => 'Je vend ma noctali femelle de 5 mois car j\'arrive pu à dormir 
-                la nuit elle squatte la chambre et avec ses néons bleu c\'est chaud !',
+                la nuit elle squatte la chambre et avec ses néons bleu j\'arrive pas à fermer les yeux',
                 'image' => '3ffbf6e9a12f0b0e263d21c8a3c7bf21.jpeg',
                 'price' => 35,
                 'exchange' => 'N\'importe quoi qui fait pas de lumière et qui prend pas trop de place',
@@ -50,8 +50,8 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'title' => 'Couple de pikachu',
-                'description' => 'Je vend mon couple de pikachu car ils arrêtent pas la nuit ça m\'empêche de dormir 
-                et comme avec mon compagnon on fait plus rien ça me frustre à mort !',
+                'description' => 'Je vend mon couple de pikachu trop mignon mais malheureusement je dois m\'en séparer
+                car je n\'ai plus les moyens de m\'occuper d\'eux',
                 'image' => '9660be3d6cb28d6d209a6ab8fb9b8879.jpeg',
                 'price' => 69.69,
                 'exchange' => NULL,
@@ -67,9 +67,8 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
                 'name' => 'Tiplouf',
             ],
             [
-                'title' => 'Pétasse d\'évolie',
-                'description' => 'C\'est une chaudasse qui aime aller chez les voisins, comme j\'arrive pas à la calmer
-                 je la vend car j\'ai pas envie de me retrouver avec une portée sur les bras !',
+                'title' => 'Évolie',
+                'description' => 'Je vend ma évolie femelle car elle ne veut pas évoluer et moi je voulais une Aqualie',
                 'image' => '61ab5688e525dad43e9f1a43892e00b5.jpeg',
                 'price' => 26.99,
                 'exchange' => NULL,
