@@ -31,34 +31,60 @@ class PokemonRepository extends ServiceEntityRepository
         if ($searchedBy === 'name') {
             $query->where('p.name LIKE :val');
         } elseif ($searchedBy === 'type') {
-            $query->where('p.type1 LIKE :val')
+            $query
+                ->where('p.type1 LIKE :val')
                 ->orWhere('p.type2 LIKE :val');
         } else {
             $query->where('p.numPokedex LIKE :val');
         }
-        $query->setFirstResult($firstResult)
+        $query
+            ->setFirstResult($firstResult)
             ->setMaxResults($maxResults)
-            ->setParameter('val', '%' . $value . '%');
-        $pag = new Paginator($query);
+            ->setParameter('val', "%$value%");
 
+        $pag = new Paginator($query);
         return $pag;
     }
 
-    public function findByUser(User $user, bool $have,int $firstResult, int $maxResults = 20)
+    public function findByUser(
+        User $user, bool $onlyPossessed, int $offset, string $searchedBy = null, string $value = null, int $limit = 20
+    )
     {
-        $query = $this->createQueryBuilder('p')
-                    ->join('p.user', 'u');
-        if ($have) {
-            $query->where('p.user NOT IN :user');
-        } else {
-            $query->where('p.user IN :user');
-        }
-        $query->setFirstResult($firstResult)
-            ->setMaxResults($maxResults)
-            ->setParameter('user', $user->getId());
-        $pag = new Paginator($query);
+        $query = $this
+            ->createQueryBuilder('p')
+            ->leftJoin('p.users', 'u');
 
-        return $pag;
+        if ($searchedBy === 'name') {
+            $query->where('p.name LIKE :val');
+        } elseif ($searchedBy === 'type') {
+            $query
+                ->where('p.type1 LIKE :val')
+                ->orWhere('p.type2 LIKE :val');
+        } else {
+            $query->where('p.numPokedex LIKE :val');
+        }
+
+        if ($onlyPossessed) {
+            $expr = $query
+                ->expr()
+                ->in('u', $user->getId());
+            $query->andWhere($expr);
+        } else {
+            foreach ($user->getPokemons() as $pokemon) {
+                $expr = $query
+                    ->expr()
+                    ->notIn('p', $pokemon->getId());
+                $query->andWhere($expr);
+            }
+        }
+
+        $query
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('val', "%$value%");
+
+        $paginator = new Paginator($query);
+        return $paginator;
     }
 
 

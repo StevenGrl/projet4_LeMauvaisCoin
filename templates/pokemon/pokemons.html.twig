@@ -32,7 +32,7 @@
                                 active
                             {% endif %}
                         ">
-                            <a class="page-link" href="{{ path('pokemon_index',
+                            <a class="page-link" id="page{{ i }}" href="{{ path('pokemon_index',
                                                 {'page': i, 'searchBy': searchBy, 'toSearch': toSearch}) }}#{{ pill }}">
                                 {{ i }}
                             </a>
