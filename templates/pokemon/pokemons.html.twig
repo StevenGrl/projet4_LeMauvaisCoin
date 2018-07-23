@@ -6,7 +6,11 @@
             </div>
         {% endif %}
     {% endfor %}
-    {% set lastPage = (nbPokemons / 20 + 1)|round(0, 'floor') %}
+    {% if nbPokemons % 20 == 0 %}
+        {% set lastPage = (nbPokemons / 20) %}
+    {% else %}
+        {% set lastPage = (nbPokemons / 20 + 1)|round(0, 'floor') %}
+    {% endif %}
     <div class="col-12">
         <div class="row justify-content-center mb-5">
             <nav aria-label="page navigation">

@@ -1,12 +1,4 @@
 $(document).on('click', '#pokemonTab .nav-link', function() {
-    const url = window.location.href;
-
-    const beginUrl = 'http://127.0.0.1:8000/pokemon/pokedex/'
-
-    let page = url.substr(beginUrl.length, 2)
-
-    if (page.charAt(1) === '#' || page.charAt(1) === '/') page = page.charAt(0);
-
     const activeTab = $(this).attr('href');
 
     window.history.pushState(document.title, document.title, activeTab)
