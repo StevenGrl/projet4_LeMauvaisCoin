@@ -76,6 +76,16 @@ class User implements UserInterface, \Serializable
      */
     private $pokemons;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $phoneNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mail;
+
     public function __toString()
     {
         return (string)$this->id;
@@ -255,6 +265,30 @@ class User implements UserInterface, \Serializable
         if ($this->pokemons->contains($pokemon)) {
             $this->pokemons->removeElement($pokemon);
         }
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
 
         return $this;
     }

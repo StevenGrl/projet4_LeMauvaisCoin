@@ -27,15 +27,7 @@
                 </div>
             </div>
             <div class="col">
-                <a href="{{ path('pokemon_index') }}" class="btn btn-dark"><i class="fas fa-chevron-left"></i> Retour</a>
-                {% if app.user == pokemon.name %}
-                    <div class="float-right">
-                        <a href="{{ path('pokemon_edit', {'id': pokemon.id}) }}" class="btn btn-primary d-inline-block mr-5">
-                            Modifier <i class="fas fa-pen-fancy"></i>
-                        </a>
-                        {{ include('pokemon/_delete_form.html.twig') }}
-                    </div>
-                {% endif %}
+                <a href="{{ path('pokemon_index') }}/1#all" class="btn btn-dark"><i class="fas fa-chevron-left"></i> Retour</a>
             </div>
         </div>
     </div>
