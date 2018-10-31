@@ -37,6 +37,11 @@ class UserType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'email'
                 )))
+            ->add('phoneNumber', TextType::class, array(
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Numéro de téléphone'
+                )))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => false, 'attr' => array(

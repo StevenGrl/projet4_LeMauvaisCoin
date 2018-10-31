@@ -53,7 +53,7 @@ class AdController extends Controller
     /**
      * @Route("/new", name="ad_new", methods="GET|POST")
      */
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function new(Request $request, StatusRepository $statusRepository, FileUploader $fileUploader): Response
     {
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
@@ -68,6 +68,7 @@ class AdController extends Controller
             $ad->setCreatedAt(new \DateTime());
             $ad->setUpdatedAt(new \DateTime());
             $ad->setCreator($this->getUser());
+            $ad->setStatus($statusRepository->findOneByLabel('Open'));
             $em->persist($ad);
             $em->flush();
 

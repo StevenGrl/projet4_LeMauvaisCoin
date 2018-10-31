@@ -24,6 +24,7 @@ class UserFixtures extends Fixture
             $user->setLastName('user '.$i);
             $user->setFirstName('user'.$i);
             $user->setEmail('user'.$i.'@gmail.com');
+            $user->setPhoneNumber('0123456789');
             $user->setPassword($this->encoder->encodePassword($user, 'azerty'));
             $user->setCity($cities[rand(0,2)]);
             $user->setRoles(['ROLE_USER']);

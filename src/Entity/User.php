@@ -81,11 +81,6 @@ class User implements UserInterface, \Serializable
      */
     private $phoneNumber;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $mail;
-
     public function __toString()
     {
         return (string)$this->id;
@@ -277,18 +272,6 @@ class User implements UserInterface, \Serializable
     public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
-    }
-
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): self
-    {
-        $this->mail = $mail;
 
         return $this;
     }
