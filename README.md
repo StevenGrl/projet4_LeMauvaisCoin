@@ -44,7 +44,7 @@ $ php bin/console doctrine:fixtures:load
 $ npm run dev (for dev environment)
 $ npm run build (for prod environment)
 
-**Launch Server PHP**
+**Launch PHP  Server**
 $ php bin/console server:run (DEV Only)
 $ for prod env, configure a web server (apache, nginx, ...)
 
