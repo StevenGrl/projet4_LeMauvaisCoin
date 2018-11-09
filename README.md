@@ -37,6 +37,9 @@ $ npm install
 $ php bin/console doctrine:database:create
 $ php bin/console doctrine:schema:update --force
 
+**Load fixtures to add Pokemons and some users in database**
+$ php bin/console doctrine:fixtures:load
+
 **Compile Webpack for CSS and JS**
 $ npm run dev (for dev environment)
 $ npm run build (for prod environment)
@@ -44,3 +47,7 @@ $ npm run build (for prod environment)
 **Launch Server PHP**
 $ php bin/console server:run (DEV Only)
 $ for prod env, configure a web server (apache, nginx, ...)
+
+*Fixtures add Pokemons with help of API : [PokéAPI](https://pokeapi.co/)*
+
+*If you want to log in with user created by fixtures you can use user0 to user4 with "azerty" as password*
